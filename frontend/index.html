@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Encryptor Mobile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>⚡ NEXUS ENCRYPTOR ⚡</header>
+    <div class="container">
+        <div class="card">
+            <label>📝 Input Text:</label>
+            <textarea id="input" placeholder="Type here or use the keyboard below..."></textarea>
+
+            <div class="info-row">
+                <div class="info-item char-counter">
+                    📊 Characters: <span id="charCount">0</span>
+                </div>
+                <div class="info-item char-counter">
+                    🔐 Strength: <span id="strength">N/A</span>
+                </div>
+            </div>
+
+            <label>📤 Output:</label>
+            <div class="output-wrapper">
+                <div id="output"></div>
+                <button id="copy">📋 Copy</button>
+            </div>
+
+            <div class="action-buttons">
+                <button id="encode">🔐 Encode</button>
+                <button id="decode">🔓 Decode</button>
+                <button id="clear">🗑️ Clear</button>
+            </div>
+
+            <div class="switch-container">
+                <div>
+                    <label style="display:inline-block; margin:0;">🔑 Cipher:</label>
+                    <select id="cipher">
+                        <option value="atbash">Atbash Cipher</option>
+                        <option value="caesar">Caesar Cipher</option>
+                        <option value="atbash-caesar" selected>Atbash + Caesar</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display:inline-block; margin:0;">↔️ Shift:</label>
+                    <input type="number" id="shift" value="3" min="-25" max="25">
+                </div>
+                <div>
+                    <label style="display:inline-block; margin:0;">⌨️ Case:</label>
+                    <select id="case-switch">
+                        <option value="upper">UPPERCASE</option>
+                        <option value="lower">lowercase</option>
+                    </select>
+                </div>
+            </div>
+
+            <label style="margin-top:15px; cursor: pointer; user-select: none;" id="keyboardToggle">⌨️ Virtual
+                Keyboard</label>
+            <div class="keyboard" id="keyboard"></div>
+
+            <div class="history-section">
+                <label>📜 History:</label>
+                <div class="history" id="history"></div>
+                <button class="clear-history-btn" id="clearHistory">🗑️ Clear History</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Keyboard Modal -->
+    <div class="keyboard-modal" id="keyboardModal">
+        <div class="keyboard-modal-content">
+            <h2>⌨️ Virtual Keyboard</h2>
+            <!-- Modal input: user types here while keyboard is open -->
+            <textarea id="modalInput" placeholder="Type here using the virtual keyboard..." readonly tabindex="-1"
+                style="width:100%; min-height:70px; margin-bottom:12px; border-radius:8px; padding:10px; background:rgba(10,10,20,0.9); color:#0ff; border:1px solid rgba(0,255,255,0.15); font-family:'Courier New', monospace;"></textarea>
+            <!-- keyboard inside modal (no duplicate id) -->
+            <div class="keyboard" id="keyboardModalInner"></div>
+            <div class="modal-buttons">
+                <button id="submitBtn" class="submit-btn">✅ Submit & Close</button>
+                <button id="closeBtn" class="close-btn">❌ Close</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

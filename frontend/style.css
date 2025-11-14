@@ -1,0 +1,729 @@
+ * {
+     box-sizing: border-box;
+ }
+
+ body {
+     margin: 0;
+     font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+     background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0d0d1f 100%);
+     color: #0ff;
+     min-height: 100vh;
+     overflow-x: hidden;
+ }
+
+ header {
+     text-align: center;
+     font-size: 2.5rem;
+     font-weight: 700;
+     margin: 20px 0;
+     text-shadow: 0 0 15px #0ff, 0 0 30px #0f0ff0, 0 0 45px rgba(0, 255, 255, 0.5);
+     letter-spacing: 2px;
+     animation: glowPulse 2s infinite;
+ }
+
+ @keyframes glowPulse {
+
+     0%,
+     100% {
+         text-shadow: 0 0 15px #0ff, 0 0 30px #0f0ff0, 0 0 45px rgba(0, 255, 255, 0.5);
+     }
+
+     50% {
+         text-shadow: 0 0 20px #0ff, 0 0 40px #0f0ff0, 0 0 60px rgba(0, 255, 255, 0.8);
+     }
+ }
+
+ .container {
+     max-width: 9999px;
+     margin: auto;
+     padding: 15px;
+ }
+
+ .card {
+     background: linear-gradient(135deg, rgba(20, 20, 40, 0.98) 0%, rgba(30, 30, 60, 0.98) 100%);
+     border: 2px solid #0ff;
+     border-radius: 15px;
+     padding: 20px;
+     margin-bottom: 20px;
+     box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1);
+     transition: transform 0.3s ease;
+ }
+
+ .card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 30px rgba(0, 255, 255, 0.15);
+ }
+
+ label {
+     display: block;
+     margin-top: 12px;
+     margin-bottom: 6px;
+     font-weight: 600;
+     font-size: 0.95rem;
+     text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+ }
+
+ #keyboardToggle {
+     cursor: pointer;
+     user-select: none;
+     transition: all 0.2s ease;
+ }
+
+ #keyboardToggle:hover {
+     text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+     font-size: 1rem;
+ }
+
+ textarea {
+     width: 100%;
+     padding: 12px;
+     font-size: 16px;
+     border-radius: 8px;
+     border: 1px solid #0ff;
+     background: linear-gradient(135deg, #0a0a15 0%, #151530 100%);
+     color: #0ff;
+     resize: vertical;
+     min-height: 80px;
+     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+     font-family: 'Courier New', monospace;
+ }
+
+ textarea:focus {
+     outline: none;
+     border-color: #00ffff;
+     box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), inset 0 0 10px rgba(0, 255, 255, 0.1);
+ }
+
+ select,
+ input[type=number] {
+     padding: 10px;
+     margin: 4px;
+     border-radius: 6px;
+     border: 1px solid #0ff;
+     background: linear-gradient(135deg, #0a0a15 0%, #151530 100%);
+     color: #0ff;
+     font-size: 14px;
+     cursor: pointer;
+     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+ }
+
+ select:hover,
+ input[type=number]:hover {
+     box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+     border-color: #00ffff;
+ }
+
+ select:focus,
+ input[type=number]:focus {
+     outline: none;
+     box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+ }
+
+ button {
+     padding: 10px 16px;
+     margin: 4px;
+     border-radius: 8px;
+     border: 1px solid #0ff;
+     background: linear-gradient(135deg, #0a0a15 0%, #151530 100%);
+     color: #0ff;
+     font-size: 14px;
+     font-weight: 600;
+     cursor: pointer;
+     transition: all 0.2s ease;
+     position: relative;
+     overflow: hidden;
+ }
+
+ button::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: -100%;
+     width: 100%;
+     height: 100%;
+     background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+     transition: left 0.5s;
+ }
+
+ button:hover::before {
+     left: 100%;
+ }
+
+ button:hover {
+     background: linear-gradient(135deg, #0ff 0%, #00ffff 100%);
+     color: #000;
+     box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+     transform: translateY(-2px);
+ }
+
+ button:active {
+     transform: translateY(0);
+     box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+ }
+
+ #output {
+     width: 100%;
+     min-height: 80px;
+     padding: 15px;
+     margin-top: 10px;
+     border-radius: 8px;
+     border: 1px solid #0ff;
+     background: linear-gradient(135deg, #0a0a15 0%, #151530 100%);
+     color: #0ff;
+     font-weight: bold;
+     white-space: pre-wrap;
+     word-break: break-all;
+     font-family: 'Courier New', monospace;
+     font-size: 15px;
+     line-height: 1.5;
+     box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.1);
+     max-height: 0;
+     opacity: 0;
+     overflow: hidden;
+     transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+     pointer-events: none;
+ }
+
+ #output.active {
+     max-height: 500px;
+     opacity: 1;
+     padding: 15px;
+     box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.2), 0 0 15px rgba(0, 255, 255, 0.3);
+     pointer-events: auto;
+ }
+
+ .info-row {
+     display: flex;
+     justify-content: space-between;
+     gap: 15px;
+     margin-top: 10px;
+     flex-wrap: wrap;
+     font-size: 0.9rem;
+     color: #0ff;
+     opacity: 0.8;
+ }
+
+ .info-item {
+     display: flex;
+     align-items: center;
+     gap: 5px;
+ }
+
+ .char-counter {
+     background: rgba(0, 255, 255, 0.1);
+     padding: 5px 10px;
+     border-radius: 6px;
+     border: 1px solid rgba(0, 255, 255, 0.3);
+ }
+
+ /* Inline keyboard hidden by default on mobile; visible on wider screens (desktop)
+   This prevents the inline keyboard from taking space on small viewports. */
+ .keyboard {
+     display: none;
+ }
+
+ /* Raise the threshold so small tablets/large phones won't show inline keyboard by accident */
+ @media (min-width: 1100px) {
+
+     /* show inline keyboard on desktop/tablet */
+     .keyboard {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         margin-top: 15px;
+         overflow-x: auto;
+         padding: 10px;
+         background: rgba(0, 255, 255, 0.05);
+         border-radius: 10px;
+         gap: 6px;
+     }
+ }
+
+ /* Keyboard Modal Styles */
+ .keyboard-modal {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background: rgba(0, 0, 0, 0.7);
+     display: none;
+     z-index: 1000;
+     align-items: center;
+     justify-content: center;
+     backdrop-filter: blur(5px);
+ }
+
+ .keyboard-modal.active {
+     display: flex;
+ }
+
+ .keyboard-modal-content {
+     background: linear-gradient(135deg, rgba(20, 20, 40, 0.99) 0%, rgba(30, 30, 60, 0.99) 100%);
+     border: 2px solid #0ff;
+     border-radius: 15px;
+     padding: 25px;
+     box-shadow: 0 0 40px rgba(0, 255, 255, 0.6), 0 0 80px rgba(0, 255, 255, 0.3);
+     max-width: 600px;
+     width: 90%;
+     animation: slideUp 0.3s ease;
+ }
+
+ @keyframes slideUp {
+     from {
+         opacity: 0;
+         transform: translateY(50px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ .keyboard-modal-content h2 {
+     margin: 0 0 15px 0;
+     text-align: center;
+     font-size: 1.8rem;
+     text-shadow: 0 0 10px #0ff;
+     letter-spacing: 1px;
+ }
+
+ .keyboard-modal .keyboard {
+     display: flex;
+     padding: 0;
+     background: transparent;
+     margin: 0;
+ }
+
+ .keyboard-modal .keyboard-row {
+     margin-bottom: 8px;
+     gap: 4px;
+ }
+
+ .keyboard-modal .keyboard button {
+     width: 45px;
+     height: 48px;
+     font-size: 13px;
+     margin: 0;
+     border: 1px solid rgba(0, 255, 255, 0.7);
+     background: linear-gradient(135deg, rgba(15, 15, 30, 0.95) 0%, rgba(25, 25, 45, 0.95) 100%);
+     box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+ }
+
+ .keyboard-modal .keyboard button:hover {
+     box-shadow: 0 0 18px rgba(0, 255, 255, 0.7);
+     transform: scale(1.12);
+ }
+
+ .keyboard-modal .keyboard button:active {
+     transform: scale(0.95);
+ }
+
+ .keyboard-modal .keyboard-row.bottom-row button {
+     min-width: 80px;
+ }
+
+ .modal-buttons {
+     display: flex;
+     gap: 10px;
+     margin-top: 20px;
+     justify-content: center;
+ }
+
+ .modal-buttons button {
+     flex: 1;
+     max-width: 150px;
+ }
+
+ .submit-btn {
+     background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%) !important;
+     color: #000 !important;
+     border-color: #00ff00 !important;
+     font-weight: bold;
+ }
+
+ .submit-btn:hover {
+     background: linear-gradient(135deg, #00dd00 0%, #00bb00 100%) !important;
+     box-shadow: 0 0 20px rgba(0, 255, 0, 0.8) !important;
+ }
+
+ .close-btn {
+     background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%) !important;
+     color: #fff !important;
+     border-color: #ff0000 !important;
+ }
+
+ .close-btn:hover {
+     background: linear-gradient(135deg, #dd0000 0%, #bb0000 100%) !important;
+     box-shadow: 0 0 20px rgba(255, 0, 0, 0.8) !important;
+ }
+
+ /* Blur effect for background content */
+ body.keyboard-open {
+     overflow: hidden;
+ }
+
+ body.keyboard-open .container {
+     filter: blur(3px);
+     pointer-events: none;
+ }
+
+ body.keyboard-open header {
+     filter: blur(3px);
+     pointer-events: none;
+ }
+
+ .keyboard-row {
+     display: flex;
+     justify-content: center;
+     flex-wrap: nowrap;
+     /* keep keys aligned in a single row */
+     margin-bottom: 6px;
+     gap: 6px;
+     white-space: nowrap;
+ }
+
+ /* small horizontal offsets to mimic real keyboard staggering */
+ .keyboard-row.row-2 {
+     padding-left: 12px;
+ }
+
+ .keyboard-row.row-3 {
+     padding-left: 24px;
+ }
+
+ .keyboard-row.bottom-row {
+     display: flex;
+     justify-content: space-around;
+     width: 100%;
+     margin-top: 6px;
+ }
+
+ .keyboard-row.bottom-row button {
+     min-width: 70px;
+     flex: 1;
+     min-width: 50px;
+ }
+
+ .keyboard button {
+     width: 38px;
+     height: 42px;
+     margin: 1px;
+     font-weight: bold;
+     border-radius: 6px;
+     border: 1px solid rgba(0, 255, 255, 0.6);
+     background: linear-gradient(135deg, rgba(15, 15, 25, 0.9) 0%, rgba(20, 20, 40, 0.9) 100%);
+     color: #0ff;
+     box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+     transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+     flex-shrink: 0;
+     cursor: pointer;
+ }
+
+ /* Make the space key larger and flexible */
+ .keyboard .space-key {
+     min-width: 160px;
+     padding-left: 8px;
+     padding-right: 8px;
+     display: inline-block;
+ }
+
+ .keyboard button:hover {
+     box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+     transform: scale(1.1);
+     border-color: #00ffff;
+ }
+
+ .keyboard button:active {
+     transform: scale(0.95);
+     box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+ }
+
+ .keyboard button.caps-active {
+     background: linear-gradient(135deg, #0ff 0%, #00ffff 100%);
+     color: #000;
+     box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+ }
+
+ .switch-container {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+     gap: 12px;
+     margin: 15px 0;
+     align-items: center;
+ }
+
+ .switch-container>label {
+     margin: 0;
+ }
+
+ .history-section {
+     margin-top: 20px;
+ }
+
+ .history {
+     max-height: 200px;
+     overflow-y: auto;
+     background: linear-gradient(135deg, rgba(10, 10, 20, 0.8) 0%, rgba(20, 20, 40, 0.8) 100%);
+     padding: 10px;
+     border-radius: 8px;
+     border: 1px solid rgba(0, 255, 255, 0.3);
+     margin-top: 10px;
+ }
+
+ .history::-webkit-scrollbar {
+     width: 6px;
+ }
+
+ .history::-webkit-scrollbar-track {
+     background: rgba(0, 255, 255, 0.05);
+     border-radius: 3px;
+ }
+
+ .history::-webkit-scrollbar-thumb {
+     background: rgba(0, 255, 255, 0.3);
+     border-radius: 3px;
+ }
+
+ .history::-webkit-scrollbar-thumb:hover {
+     background: rgba(0, 255, 255, 0.6);
+ }
+
+ .history div {
+     border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+     padding: 8px;
+     font-size: 12px;
+     cursor: pointer;
+     transition: all 0.15s ease;
+     border-radius: 4px;
+     margin-bottom: 4px;
+     word-break: break-all;
+ }
+
+ .history div:hover {
+     background: linear-gradient(90deg, rgba(0, 255, 255, 0.1) 0%, rgba(0, 255, 255, 0.05) 100%);
+     border-left: 3px solid #0ff;
+     padding-left: 5px;
+     transform: translateX(5px);
+ }
+
+ /* Output with side-by-side copy button */
+ .output-wrapper {
+     display: flex;
+     gap: 10px;
+     align-items: flex-start;
+ }
+
+ .output-wrapper #output {
+     flex: 1;
+ }
+
+ .output-wrapper #copy {
+     align-self: center;
+     white-space: nowrap;
+     flex-shrink: 0;
+     margin-top: 10px;
+ }
+
+ .action-buttons {
+     display: flex;
+     justify-content: center;
+     flex-wrap: wrap;
+     margin-top: 12px;
+     gap: 8px;
+ }
+
+ .action-buttons button {
+     flex: 1;
+     min-width: 80px;
+     max-width: 120px;
+ }
+
+ .clear-history-btn {
+     font-size: 12px;
+     padding: 6px 10px;
+     margin-top: 8px;
+ }
+
+ @media(max-width:768px) {
+     header {
+         font-size: 2rem;
+     }
+
+     .switch-container {
+         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+         gap: 8px;
+     }
+
+     .keyboard button {
+         width: 32px;
+         height: 36px;
+         font-size: 12px;
+     }
+
+     .keyboard-row.bottom-row button {
+         min-width: 45px;
+     }
+
+     .action-buttons button {
+         flex: 1;
+         min-width: 60px;
+     }
+ }
+
+ @media(max-width:480px) {
+     .container {
+         padding: 10px;
+     }
+
+     .card {
+         padding: 12px;
+     }
+
+     header {
+         font-size: 1.5rem;
+         margin: 10px 0;
+     }
+
+     label {
+         margin-top: 8px;
+         font-size: 0.85rem;
+     }
+
+     textarea {
+         font-size: 14px;
+         min-height: 60px;
+     }
+
+     .switch-container {
+         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+         gap: 6px;
+     }
+
+     select,
+     input[type=number] {
+         padding: 8px;
+         font-size: 12px;
+     }
+
+     .keyboard button {
+         width: 36px;
+         height: 40px;
+         font-size: 12px;
+         margin: 2px;
+     }
+
+     .keyboard-row.bottom-row button {
+         min-width: 35px;
+     }
+
+     button {
+         padding: 8px 12px;
+         font-size: 12px;
+     }
+
+     .info-row {
+         font-size: 0.8rem;
+         gap: 8px;
+     }
+
+     /* Mobile: Stack copy button below output */
+     .output-wrapper {
+         flex-direction: column;
+     }
+
+     .output-wrapper #copy {
+         align-self: stretch;
+         margin-top: 8px;
+     }
+
+     #output {
+         min-height: 60px;
+         margin-top: 0;
+     }
+
+     /* Mobile Modal Keyboard */
+     .keyboard-modal-content {
+         max-width: 95%;
+         padding: 15px;
+     }
+
+     .keyboard-modal-content h2 {
+         font-size: 1.3rem;
+         margin-bottom: 10px;
+     }
+
+     .keyboard-modal .keyboard button {
+         width: 42px;
+         height: 46px;
+         font-size: 12px;
+     }
+
+     .keyboard-modal .keyboard-row {
+         margin-bottom: 6px;
+         gap: 3px;
+     }
+
+     .keyboard-modal .keyboard-row.bottom-row button {
+         min-width: 60px;
+     }
+
+     .modal-buttons {
+         gap: 8px;
+         margin-top: 15px;
+     }
+
+     .modal-buttons button {
+         max-width: none;
+     }
+     
+     .keyboard-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow-y: auto; /* allow scrolling on small screens */
+    }
+
+    .keyboard-modal-content {
+        max-width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 15px;
+        border-radius: 12px;
+        background: #111;
+    }
+
+    .keyboard .key {
+    min-width: 40px;
+    min-height: 45px;
+    margin: 3px;
+    font-size: 16px;
+    }
+    .keyboard .space-key {
+        flex: 1; /* Space bar stretches to full width */
+    }
+
+    body.keyboard-open {
+    overflow: hidden; /* prevent background scroll */
+    }
+
+    .keyboard-modal-content {
+        margin-top: auto;
+        margin-bottom: 0;
+        width: 100%;
+        max-width: 600px;
+        border-radius: 12px 12px 0 0;
+    }
+
+
+
+ }
+
+ textarea, input {
+    touch-action: manipulation; /* prevent accidental zoom/scroll on touch */
+}
